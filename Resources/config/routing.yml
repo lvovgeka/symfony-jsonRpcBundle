@@ -1,0 +1,7 @@
+#lvovgeka_json_rpc:
+##    path:    "/"
+#    defaults: { _controller: LvovgekaJsonRpcBundle:Rpc:index }
+#    methods:  [POST, GET]
+lvovgeka_json_rpc:
+    resource: "@LvovgekaJsonRpcBundle/Controller/RpcController.php"
+    type:     annotation
