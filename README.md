@@ -119,6 +119,67 @@ if you see:
 ```
 You have correctly created your new rpc method.
 
+### How to throw a request to the server
+
+- On which route to send the requests?
+
+By default, rpc server is listening http://youdomain.com/json-rpc but you can change this in the routing.yml by adding the statement prefix.
+
+- How to send requests?
+
+For POST, PUT ... : In the request body
+
+Example with HttpRequest:
+```php
+<?php
+
+$request = new HttpRequest();
+$request->setUrl('http://youdomain.com/json-rpc');
+$request->setMethod(HTTP_METH_POST); 
+$request->setBody('{"jsonrpc": "2.0", "method": "Foo", "params": {"param1": 1, "param2": 2}, "id": 1}');
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}
+```
+
+---------------------------------------
+
+For Get, COPY ... : In the get params
+
+
+Example with HttpRequest:
+```php
+ <?php
+ 
+ $request = new HttpRequest();
+ $request->setUrl('http://youdomain.com/json-rpc');
+ $request->setMethod(HTTP_METH_GET);
+ $request->setQueryData(array(
+   'request' => '{"jsonrpc": "2.0", "method": "Foo", "params": {"param1": 1, "param2": 2}, "id": 1}'
+ )); 
+  
+ try {
+   $response = $request->send();
+ 
+   echo $response->getBody();
+ } catch (HttpException $ex) {
+   echo $ex;
+ }
+```
+
+
+---------------------------------------
+
+
+
+
+
+
 
 License
 ----
